@@ -1,18 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Lista de todos los empleados </h1>
-       
-    {% for emp in object_list %}
-        <li>{{emp}}</li>
-        
-    {% endfor %}
-        
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Todos los empleados
+{% endblock title %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <h2 class="cell">Lista de Empleados</h2>
+
+            <form class="cell grid-x grid-margin-x" method="GET"> {% csrf_token %}
+                <div class="cell large-7">
+                    <input type="text" id="kword" name="kword" placeholder="Buscar Empleado">
+                </div>
+                <div class="cell large-2">
+                    <button type="submit" class="button secondary">Buscar</a>
+                </div>
+              </form>
+
+            <div class="cell">
+                <table>
+                    <thead>
+                      <tr>
+                        <th width="100">ID</th>
+                        <th>Nombres</th>
+                        <th width="150">Apellidos</th>
+                        <th width="200">Departamento</th>
+                        <th width="100">Accion</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for emp in empleados %}
+                        <tr>
+                          <td>{{emp.id}}</td>
+                          <td>{{emp.first_name}}</td>
+                          <td>{{emp.last_name}}</td>
+                          <td>{{emp.departamento}}</td>
+                          <td><a class="hollow button secondary" href="{% url 'persona_app:empleado_detail' emp.id %}">Ver</a>
+                          </td>
+                        </tr>                            
+                        {% endfor %}
+                            
+                    
+                    </tbody>
+                  </table>
+            </div>
+
+            <div class="cell">
+              {% if is_paginated %}  
+              <nav aria-label="Pagination">
+                <ul class="pagination">
+                  
+                  {% if page_obj.has_previous %}
+                    <li class="pagination-previous">
+                      <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+                    </li>
+                  {% endif %}
+                  
+                  
+                  {% for pagina in paginator.page_range %}
+                    <li><a href="?page={{pagina}}">{{pagina}}</a></li>
+                  {% endfor %}
+                  
+                  
+                  {% if page_obj.has_next %}
+                    <li class="pagination-next">
+                    <a href="?page={{page_obj.next_page_number}}">Siguiente </a></li>
+                  {% endif %}
+                    
+                </ul>
+              </nav>
+              {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+    
+ 
+

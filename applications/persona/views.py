@@ -30,8 +30,17 @@ class InicioView(TemplateView):
 # Lista de todos los empleados
 class ListAllEmpleados(ListView):
     template_name = 'persona/list_all.html'
-    paginate_by = 2
-    model = Empleado
+    paginate_by = 4
+    ordering = 'first_name'
+    context_object_name = 'empleados'
+    # model = Empleado
+    # Buscar
+    def get_queryset(self):
+        key_word = self.request.GET.get("kword", '')
+        queryset = Empleado.objects.filter(
+            first_name__icontains=key_word
+        )
+        return queryset
 
 # Lista de empleados por area
 class ListByAreaEmpleados(ListView):
