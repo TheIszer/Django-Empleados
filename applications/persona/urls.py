@@ -15,6 +15,11 @@ urlpatterns = [
         name="list_all_empleados"
     ),
     path(
+        "listar-empleados-admin/",
+        views.ListEmpleadosAdmin.as_view(),
+        name="empleados_admin"
+    ),
+    path(
         "listar-por-area/<shortname>/",
         views.ListByAreaEmpleados.as_view(),
         name="list_by_area"
@@ -57,6 +62,6 @@ urlpatterns = [
     path(
         "delete-empleado/<pk>/", 
         views.EmpleadoDeleteView.as_view(), 
-        name='update_empleado'
+        name='delete_empleado'
     ),
 ]

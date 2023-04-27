@@ -41,6 +41,16 @@ class ListAllEmpleados(ListView):
             first_name__icontains=key_word
         )
         return queryset
+    
+
+# Lista los empleados en forma de admin
+class ListEmpleadosAdmin(ListView):
+    template_name = 'persona/list_empleados_admin.html'
+    paginate_by = 4
+    ordering = 'first_name'
+    context_object_name = 'empleados'
+    model = Empleado
+
 
 # Lista de empleados por area
 class ListByAreaEmpleados(ListView):
@@ -143,12 +153,11 @@ class EmpleadoUpdateView(UpdateView):
         'departamento',
         'habilidades',
     ]
-    success_url = reverse_lazy('persona_app:correcto')
+    success_url = reverse_lazy('persona_app:empleados_admin')
 
 # Eliminar un Empleado
-
 class EmpleadoDeleteView(DeleteView):
     model = Empleado
     template_name = "persona/delete.html"
-    success_url = reverse_lazy('persona_app:correcto')
+    success_url = reverse_lazy('persona_app:empleados_admin')
 

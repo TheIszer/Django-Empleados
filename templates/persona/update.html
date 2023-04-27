@@ -1,18 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Editar informacion de un empleado </h1>
+{% extends 'base.html' %}
 
-    <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Update</button>
-    </form>
+
+{% block title %}
+    Editar empleado
+{% endblock title %}
     
-</body>
-</html>
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Editar informacion de un empleado</h1>
+
+            <div clas="cell">
+                <form class="grid-x grid-margin-x" method="POST"> {% csrf_token %}
+                    <div class="cell large-6 cell">
+                        <label>Nombres:
+                            {{form.first_name}}
+                        </label>
+                    </div>
+                    <div class="cell large-6 cell">
+                        <label>Apellidos:
+                            {{form.last_name}}
+                        </label>
+                    </div>
+                    <div class="cell large-6 cell">
+                        <label>Trabajo:
+                            {{form.job}}
+                        </label>
+                    </div>
+                    <div class="cell large-6 cell">
+                        <label>Area:
+                            {{form.departamento}}
+                        </label>
+                    </div>
+                    <div class="cell large-6 cell">
+                        <label>Habilidades:
+                            {{form.habilidades}}
+                        </label>
+                    </div>
+                    <div class="cell">
+                        <button class="hollow button success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
+    
+
