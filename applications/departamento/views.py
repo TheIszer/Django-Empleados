@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView 
 from django.views.generic.edit import FormView
 
 from applications.persona.models import Empleado
@@ -7,6 +8,15 @@ from applications.departamento.models import Departamento
 from .forms import NewDepartamentoForm
 
 # Create your views here.
+# Ver el listado de departamentos
+
+class DepartamentoListView(ListView):
+    model = Departamento
+    template_name = "departamento/lista_departamento.html"
+    context_object_name = 'departamentos'
+
+
+# Crear un Nuevo Departemento/
 class NewDepartamentoView(FormView):
     template_name = 'departamento/new_departamento.html'
     form_class = NewDepartamentoForm
