@@ -130,6 +130,7 @@ class EmpleadoCreateView(CreateView):
         'first_name',
         'last_name',
         'job',
+        'avatar',
         'departamento',
         'habilidades',
     ]
@@ -150,6 +151,7 @@ class EmpleadoUpdateView(UpdateView):
         'first_name',
         'last_name',
         'job',
+        'avatar',
         'departamento',
         'habilidades',
     ]
