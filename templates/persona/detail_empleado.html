@@ -1,17 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ object.full_name }}
+{% endblock title %}
+    
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x align-center">
+
+            <div class="card large-8" style="width: 300px; margin-top: 10px;">
+                <div class="card-divider">
+                    {{empleado.get_job_display}}
+                </div>
+                
+                {% if empleado.avatar %}
+                    <img src="{{ empleado.avatar.url }}">
+                {% else %}
+                    <img src="{% static 'img/empleado02.jpg' %}">
+                {% endif %}
+
+                    
+                <div class="card-section">
+                    <h4>{{empleado.first_name}} {{empleado.last_name}}</h4>
+                    <p>{{empleado.departamento.shor_name}}</p>
+                    <p><span>Habilidades:</span></p>
+                    <ul class="vertical-menu"> 
+                        
+                        {% for h in empleado.habilidades.all %}
+                            <li>{{ h.habilidad }}</li>
+                        {% endfor %}
+                            
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+
     <h1>Detalles de un empleado </h1>
     {{object}}
     <li>{{object.first_name}}</li>
     <li>{{object.last_name}}</li>
     <li>{{object.departamento}}</li>
         
-</body>
-</html>
