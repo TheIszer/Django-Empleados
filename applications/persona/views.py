@@ -11,6 +11,8 @@ from django.views.generic import (
 
 # Models
 from .models import Empleado
+# Forms
+from .forms import EmpleadoForm
 '''
 REQUIREMENTS:
 1.- listar todos los empleados de la empresa
@@ -126,14 +128,17 @@ class EmpleadoCreateView(CreateView):
     # fields = ('__all__')
     # success_url = '.'                                  # Same URL
     # success_url = '/success'
-    fields = [
-        'first_name',
-        'last_name',
-        'job',
-        'avatar',
-        'departamento',
-        'habilidades',
-    ]
+
+    # fields = [
+    #     'first_name',
+    #     'last_name',
+    #     'job',
+    #     'avatar',
+    #     'departamento',
+    #     'habilidades',
+    # ]
+
+    form_class = EmpleadoForm
     success_url = reverse_lazy('persona_app:empleados_admin')
 
     def form_valid(self, form):
