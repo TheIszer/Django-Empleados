@@ -1,18 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Registrar a un empleado </h1>
+{% extends 'base.html' %}
 
-        <form method="POST"> {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Registrar</button>
-        </form>
+
+{% block title %}
+    Registrar empleado
+{% endblock title %}
     
-</body>
-</html>
+
+{% block content %}
+    {% include 'includes/header.html' %}
+
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Registrar usuario</h1>
+
+            <form class="grid-x grid-margin-x" method="POST"> {% csrf_token %}
+                <div class="cell large-6 cell">
+                    <label>Nombres:
+                        {{form.first_name}}
+                    </label>
+                </div>
+                <div class="cell large-6 cell">
+                    <label>Apellidos:
+                        {{form.last_name}}
+                    </label>
+                </div>
+                <div class="cell large-6 cell">
+                    <label>Trabajo:
+                        {{form.job}}
+                    </label>
+                </div>
+                <div class="cell large-6 cell">
+                    <label>Area:
+                        {{form.departamento}}
+                    </label>
+                </div>
+                <div class="cell large-6 cell">
+                    <label>Habilidades:
+                        {{form.habilidades}}
+                    </label>
+                </div>
+                <div class="cell">
+                    <button class="hollow button success">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
